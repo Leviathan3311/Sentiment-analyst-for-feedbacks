@@ -8,11 +8,13 @@ let remove_file  = document.getElementById("remove-file")
 let file_name  = document.getElementById("file-name")
 let porcion1_c  = document.getElementById("porcion1-c")
 let donut_chart  = document.getElementById("donut-chart")
+let switch_button  = document.getElementsByClassName("switch-button")
 
 
-let update_circle_chart = function(type,pos,neg){
-	porcion1_c.style.transform = `rotate(${pos*360/(pos+neg)}deg)`
-	if (pos < neg){
+let update_circle_chart = function(type,data){
+
+	porcion1_c.style.transform = `rotate(${data["pos"]*360/(data["pos"]+data["neg"])}deg)`
+	if (data["pos"] < data["neg"]){
 		porcion1_c.style.backgroundColor = `#4fc4f6`
 		donut_chart.style.backgroundColor = `#e64c65`
 	} else {
@@ -20,6 +22,36 @@ let update_circle_chart = function(type,pos,neg){
 		donut_chart.style.backgroundColor = `#4fc4f6`
 	}
 }
+
+
+let update_new_pie_chart = function(data){
+	Array.from(switch_button).forEach(function myFunction(item, i) {
+		item.addEventListener("click", function( event ) {  
+			type = item.getAttribute("name")
+			update_circle_chart(type,data[type])
+		})
+	  })
+
+}
+
+result = {
+	"Fashion":{
+		"pos":10,
+		"neg":20
+	},
+	"Film":{
+		"pos":30,
+		"neg":20
+	},
+	"Food":{
+		"pos":100,
+		"neg":20
+	}
+}
+
+
+update_new_pie_chart(result)
+
 
 fileInput.addEventListener("change", function( event ) {  
     upload_block.style.visibility = "hidden"
@@ -41,7 +73,23 @@ fileInput.addEventListener("change", function( event ) {
 			// alert( "success" );
 			console.log("Success")
 			console.log(result)
-			update_circle_chart("",result['fas_pos'],result['fas_neg'])
+			result = {
+				"Fashion":{
+					"pos":10,
+					"neg":20
+				},
+				"Film":{
+					"pos":30,
+					"neg":20
+				},
+				"Food":{
+					"pos":100,
+					"neg":20
+				}
+			}
+
+
+			update_new_pie_chart(result)
 	
 		  })
 		  .fail(function() {
