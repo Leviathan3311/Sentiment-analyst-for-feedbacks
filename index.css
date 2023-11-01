@@ -67,7 +67,7 @@ border-top-right-radius: 5px;
 		/******************************************** LEFT CONTAINER *****************************************/
 		.left-container {}
 			.menu-box {
-				height: 360px;
+				height: 400px;
 			}
 
 			.donut-chart-block {
@@ -76,31 +76,28 @@ border-top-right-radius: 5px;
 				.donut-chart-block .titular {
 					padding: 10px 0;
 				}
-				.os-percentages li {
-					width: 75px;
-					border-left: 1px solid #394264;
-					text-align: center;					
-					background: #50597b;
-				}
-					.os {
-						margin: 0;
-						padding: 10px 0 5px;
-						font-size: 15px;		
-					}
-						.os.negative {
-							border-top: 4px solid #e64c65;
-						}
-						.os.neutral {
-							border-top: 4px solid #fcb150;
-						}
-						.os.positive {
-							border-top: 4px solid #4fc4f6;
-						}
-					.os-percentage {
-						margin: 0;
-						padding: 0 0 15px 10px;
-						font-size: 25px;
-					}
+        .switch-button-container{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+        }
+        .switch-button {
+          background-color: transparent;
+          border: 1px solid #ccc;
+          padding: 10px 20px;
+          margin: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease, border-color 0.3s ease;
+          color: #ccc;
+          text-decoration: none;
+          border-radius: 5px;
+        }
+        .switch-button:hover {
+          background-color: #e62222; 
+          border-color: #999; 
+      }
+      
 			.line-chart-block, .bar-chart-block {
 				height: 400px;
 			}
@@ -520,6 +517,9 @@ input file
     font-style: normal;
     font-weight: normal;
   }
+
+
+  
   
   
   
