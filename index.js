@@ -10,9 +10,10 @@ let porcion1_c  = document.getElementById("porcion1-c")
 let donut_chart  = document.getElementById("donut-chart")
 let switch_button  = document.getElementsByClassName("switch-button")
 
+
+
 const ctx = document.getElementById('myPieChart').getContext('2d');
 const myPieChart = new Chart(ctx, {
-
 	type: 'pie',
 	data: {
 		labels: ['positive', 'negative'],
