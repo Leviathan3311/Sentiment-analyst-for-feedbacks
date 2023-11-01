@@ -10,30 +10,23 @@ let porcion1_c  = document.getElementById("porcion1-c")
 let donut_chart  = document.getElementById("donut-chart")
 let switch_button  = document.getElementsByClassName("switch-button")
 
+const ctx = document.getElementById('myPieChart').getContext('2d');
+const myPieChart = new Chart(ctx, {
 
-let update_circle_chart = function(type,data){
-
-	porcion1_c.style.transform = `rotate(${data["pos"]*360/(data["pos"]+data["neg"])}deg)`
-	if (data["pos"] < data["neg"]){
-		porcion1_c.style.backgroundColor = `#4fc4f6`
-		donut_chart.style.backgroundColor = `#e64c65`
-	} else {
-		porcion1_c.style.backgroundColor = `#e64c65`
-		donut_chart.style.backgroundColor = `#4fc4f6`
+	type: 'pie',
+	data: {
+		labels: ['positive', 'negative'],
+		datasets: [{
+			data: [],
+			backgroundColor: ['green', 'red']
+		}]
 	}
+});
+
+let click_chart = function(data,type) {  
+	myPieChart.data.datasets[0].data = [data[type]["pos"], data[type]["neg"]];
+	myPieChart.update();
 }
-
-
-let update_new_pie_chart = function(data){
-	Array.from(switch_button).forEach(function myFunction(item, i) {
-		item.addEventListener("click", function( event ) {  
-			type = item.getAttribute("name")
-			update_circle_chart(type,data[type])
-		})
-	  })
-
-}
-
 result = {
 	"Fashion":{
 		"pos":10,
@@ -48,6 +41,18 @@ result = {
 		"neg":20
 	}
 }
+
+click_chart(result,"Fashion")
+
+let update_new_pie_chart = function(data){
+	Array.from(switch_button).forEach(function myFunction(item, i) {
+		item.addEventListener("click", function(event){
+			type = item.getAttribute("name")
+			click_chart(data,type)
+		})
+	  })
+}
+
 
 
 update_new_pie_chart(result)

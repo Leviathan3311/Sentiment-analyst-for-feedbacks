@@ -14,6 +14,7 @@
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
     <title>Document</title>
 </head>
@@ -148,11 +149,7 @@
       <div class="container">
         <div class="donut-chart-block block">
             <h2 class="titular">OS AUDIENCE STATS</h2>
-            <div class="donut-chart" id="donut-chart">
-                <div id="porcion1" class="recorte">
-                    <div id="porcion1-c" class="quesito neutral"></div>
-                </div>
-            </div>
+            <canvas id="myPieChart" width="400" height="400"></canvas>
             <div class="os-percentages horizontal-list switch-button-container">
                 <button class="switch-button" name="Fashion" data-criteria="fashion">Fashion</button>
                 <button class="switch-button" name="Film" data-criteria="film">Film</button>
