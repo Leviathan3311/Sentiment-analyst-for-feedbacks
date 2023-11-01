@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category Comments Pie Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .category-btn {
+            cursor: pointer;
+            margin: 5px;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <button class="category-btn" data-category="CategoryA">Category A</button>
+    <button class="category-btn" data-category="CategoryB">Category B</button>
+    <button class="category-btn" data-category="CategoryC">Category C</button>
+
+    <canvas id="myPieChart" width="400" height="400"></canvas>
+
+    <script>
+        const commentsData = {
+            CategoryA: {
+                positive: 60,
+                negative: 40
+            },
+            CategoryB: {
+                positive: 70,
+                negative: 30
+            },
+            CategoryC: {
+                positive: 50,
+                negative: 50
+            }
+        };
+
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+        const myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Positive', 'Negative'],
+                datasets: [{
+                    data: [],
+                    backgroundColor: ['green', 'red']
+                }]
+            }
+        });
+
+        function updatePieChart(category) {
+            const positivePercentage = commentsData[category].positive;
+            const negativePercentage = commentsData[category].negative;
+
+            myPieChart.data.datasets[0].data = [positivePercentage, negativePercentage];
+            myPieChart.update();
+        }
+
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(button => {
+            button.addEventListener('mouseover', () => {
+                const category = button.getAttribute('data-category');
+                updatePieChart(category);
+            });
+        });
+    </script>
+</body>
+</html>
