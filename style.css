@@ -1,0 +1,87 @@
+/* styles.css */
+
+body {
+  text-align: center;
+  background-image: url('/static/dau.jpg'), linear-gradient(to right, #e2e2e2, #CCCCFF);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: 'Tahoma', sans-serif;
+}
+
+.user-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #d7c8b9ad;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+}
+
+.user-input label {
+  font-weight: bold;
+}
+
+.user-input input,
+.user-input textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.user-input button {
+  background-color: #512da8;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.user-input button:hover {
+  background-color: #4100a8;
+}
+
+.user-input-container h3 {
+  font-family: 'Kalam', cursive;
+  text-align: right;
+  margin-right: 5%;
+}
+
+.logo {
+  width: 27%;
+  height: auto;
+  margin-right: 10%;
+}
+
+.user-input-container .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CSS for positive sentiment */
+.sentiment-text.positive {
+  color: green; /* Màu xanh cho sentiment positive */
+}
+
+/* CSS for negative sentiment */
+.sentiment-text.negative {
+  color: red; /* Màu đỏ cho sentiment negative */
+}
+
+
+#VyHome a:hover {
+  color: #337ab7; /* Keep the original text color */
+  text-decoration: none; /* Remove the underline on hover */
+}
