@@ -9,14 +9,12 @@ let file_name  = document.getElementById("file-name")
 let porcion1_c  = document.getElementById("porcion1-c")
 let donut_chart  = document.getElementById("donut-chart")
 let switch_button  = document.getElementsByClassName("switch-button")
-let ctx2 = document.getElementById('myDoubleBarChart').getContext('2d');
-const ctx = document.getElementById('myPieChart').getContext('2d');
 
 
 data = {
 	"Fashion":{
-		"pos":0,
-		"neg":0
+		"pos":10,
+		"neg":20
 	},
 	"Film":{
 		"pos":30,
@@ -30,7 +28,8 @@ data = {
 
 
 
-let myPieChart = new Chart(ctx, {
+const ctx = document.getElementById('myPieChart').getContext('2d');
+const myPieChart = new Chart(ctx, {
 	type: 'pie',
 	data: {
 		labels: ['positive', 'negative'],
@@ -41,84 +40,27 @@ let myPieChart = new Chart(ctx, {
 	}
 });
 
-let doubleBarChart = new Chart(ctx2, {
-	type: 'bar',
-	data: {
-		labels: ["Fashion","Film","Food"],
-		datasets: [
-			{
-				label: 'Positive',
-				data: [0,0,0],
-				backgroundColor: 'rgba(75, 192, 192, 0.2)',
-				borderColor: 'rgba(75, 192, 192, 1)',
-				borderWidth: 1
-			},
-			{
-				label: 'Negative',
-				data: [0,0,0],
-				backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				borderColor: 'rgba(255, 99, 132, 1)',
-				borderWidth: 1
-			}
-		]
-	},
-	options: {
-		scales: {
-			y: {
-				beginAtZero: true
-			}
-		}
-	}
-});
-
 let click_chart = function(data,type) {  
 	myPieChart.data.datasets[0].data = [data[type]["pos"], data[type]["neg"]];
 	myPieChart.update();
 }
 
 
+click_chart(data,"Fashion")
 
-let check_data = function(data) {  
-	new_data = {}
-	for (const [key, value] of Object.entries(data)) {
-		if (value['pos'] >0 || value['neg'] >0){
-			new_data[key] = value
-		}
-	  }
-	return new_data
-}
-
-
-
-let active_PieChart = function(data) {  
-	new_data = check_data(data)
-	new_type = Object.keys(new_data)
+let update_new_pie_chart = function(data){
 	Array.from(switch_button).forEach(function myFunction(item, i) {
-		type = item.getAttribute("name")
-		if (new_type.includes(type)){
-			item.style.display = "block"
-			item.addEventListener("click", function(event){
-				click_chart(new_data,item.getAttribute("name"))
-			})
-		} else {
-			item.style.display = "none"
-		}
+		item.addEventListener("click", function(event){
+			type = item.getAttribute("name")
+			click_chart(data,type)
+			console.log(type)
+		})
 	  })
-	click_chart(data,new_type[0])
-	
-	
 }
-active_PieChart(data)
 
-let active_doubleBarChart = function(data) {  
-	new_data = check_data(data)
-	new_type = Object.keys(new_data)
-	doubleBarChart.data.labels = new_type
-	doubleBarChart.data.datasets[0].data = Object.values(new_data).map(value =>  value["pos"])
-	doubleBarChart.data.datasets[1].data = Object.values(new_data).map(value =>  value["neg"])
-	doubleBarChart.update()
-}
-active_doubleBarChart(data)
+
+
+update_new_pie_chart(data)
 
 
 fileInput.addEventListener("change", function( event ) {  
@@ -126,7 +68,7 @@ fileInput.addEventListener("change", function( event ) {
     uploaded_block.style.visibility = "visible"
     file_name.innerText = this.value
 
-	let reader = new FileReader();
+	let reader = new FileReader();	
   
 	reader.readAsDataURL(fileInput.files[0]);
 	reader.onload = function () {
@@ -209,6 +151,9 @@ remove_file.addEventListener("click", function( event ) {
 				},1);
 			}
 	});	
+
+	
+	
 	
 
 	
