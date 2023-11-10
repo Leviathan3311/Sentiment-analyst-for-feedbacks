@@ -2,7 +2,7 @@
   position: relative;
   height: 85vh;
   width: 100%;
-
+  display: none
 }
 
 .input-text {
@@ -56,7 +56,7 @@ textarea {vertical-align:top}
   font-size: 20px;
   padding: 4px 10px;
 }
-.classify-button{
+.classify-button,.expand-lineChart{
   background-color: #C2FBD7;
   border-radius: 50px;
   border-width: 0;
@@ -67,12 +67,13 @@ textarea {vertical-align:top}
   font-family: Arial, sans-serif;
   font-size: 1em;
   height: 40px;
+  width: 140px !important;
   padding: 0 25px;
   transition: all 200ms;
   margin: 20px 10px;
   line-height: 40px;
 }
-.classify-button:hover{ 
+.classify-button:hover,.expand-lineChart:hover{ 
 background-color: #AFE6C3;
 transform: scale(1.02);
 }

@@ -5,7 +5,9 @@
   box-sizing: border-box;  
 }
 body {
-	background: linear-gradient(to right, #A8B4BA, #6DA6C0) !important;
+	/* background: linear-gradient(to right, #A8B4BA, #6DA6C0) !important;
+   */
+   background-color: rgba(3 164 255 / 20%) !important;
 }
 
 ul {
@@ -48,6 +50,19 @@ text-align: center;
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
 }
+.row-1{
+  position: relative;
+  height: 500px;
+}
+.chart-row-wrapper{
+  border-bottom:2px groove black;
+  padding: 12px 0;
+  display: flex;
+  justify-content: center;
+}
+.line-chart-block{
+  flex:1 !important;
+}
 .horizontal-list {
 	margin: 0;
 	padding: 0;
@@ -58,12 +73,15 @@ border-top-right-radius: 5px;
 	}
 
 		.block {
-			margin: 25px 25px 0 0;
-			background: #394264;
+      height: auto; 
+      width: initial;
+      padding: 10px;
+      background-clip: content-box !important;
+			/* background: #394264; */
 			border-radius: 5px;
       float: left;
-      width: 300px;
       overflow: hidden;
+      
       
 		}
 		/******************************************** LEFT CONTAINER *****************************************/
@@ -111,9 +129,7 @@ border-top-right-radius: 5px;
           border-color: #999; 
       }
       
-			.line-chart-block, .bar-chart-block {
-				height: 400px;
-			}
+		
 				.line-chart {
 					height: 200px;
 					background: #11a8ab;
@@ -395,11 +411,11 @@ BAR-CHART
 input file
 **************************/
 .input-file-wrapper{
-    position:relative;
+    background: rgb(0 173 255 / 20%);
+    position:inherit;
     width: 100%;
-    height: 300px;
+    height: 100%;
     border-radius: 5px;
-    background-image: linear-gradient(326deg, #9921e8 0, #5f72be 154%);
 }
     
 .upload-block {

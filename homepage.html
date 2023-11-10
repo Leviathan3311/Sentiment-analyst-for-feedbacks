@@ -49,7 +49,7 @@
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">fdsfsff</ah
+                                        <a class="dropdown-item" href="#">fdsfsff</a>
 										<a class="dropdown-item" href="#">sdfsd  5terteet</a>
 										<a class="dropdown-item" href="#">fsf s wef</a>
 										<a class="dropdown-item" href="#">Arewrere </a>
@@ -120,96 +120,88 @@
             </div>
         </div>
     </div>
-    <form action="#">
-        <div class="input-file-wrapper">
-           
-            <div class="input-file-container"> 
-                <div class="file-uploaded-block" id="uploaded-block">
-                    <div class="file-icon"><i class="fa-solid fa-file-csv"></i></div>
-                    <div class="file-name" id="file-name"></div>
-                    <div class="remove-file" id="remove-file"><i class="fa-solid fa-delete-left"></i></div>
-                </div> 
-                <div class="upload-block" id="upload-block">
-                    <input class="input-file" id="my-file" type="file" name="my-file">
-                    <label class="input-button" for="my-file">
-                        Choose File
-                    </label>
-                    <label tabindex="0" for="my-file" class="input-file-trigger">Or drop file here</label>
-                </div>
-                
-            </div> 
-           <div id="load-animation">
-            <div class="btnMore"><div class="ellipsis"><div></div><div></div><div></div><div></div></div></div> 
-           </div>
-        </div>
-        <p class="file-return"></p>
-      </form>
+
 
       
       <!-- LINE CHART BLOCK (LEFT-CONTAINER) -->
-    <div id="line-chart-food">    
-        <div class="line-chart-block block">
-        
-            <h2 class="titular">Line chart food</h2>
-            <canvas id="lineChartFood" width="600" height="400"></canvas>
-            <div class="lineChart-percentages horizontal-list switch-button-container">
-                <button class="time-button" name="Next" data-criteria="next">Next</button>
-                <button class="time-button" name="Previous" data-criteria="previous">Previous</button>
-            </div>
-        </div>    
-        </div>
-    </div> 
-    
-    <div id="line-chart-fashion">
-        <div class="line-chart-block block">
-        
-            <h2 class="titular">Line chart fashion</h2>
-            <canvas id="lineChartFashion" width="600" height="400"></canvas>
-            <div class="lineChart-percentages horizontal-list switch-button-container">
-                
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-
-    <div id="line-chart-film">  
-        <div class="line-chart-block block">
-        
-            <h2 class="titular">Line chart film</h2>
-            <canvas id="lineChartFilm" width="600" height="400"></canvas>
-            <div class="lineChart-percentages horizontal-list switch-button-container">
-                
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-
-      <div class="container">
-        <div class="donut-chart-block block">
-            <h2 class="titular">OS AUDIENCE STATS</h2>
-            <canvas id="myPieChart" width="400" height="400"></canvas>
-            <div class="os-percentages horizontal-list switch-button-container">
-                <button class="switch-button" name="Fashion" data-criteria="fashion">Fashion</button>
-                <button class="switch-button" name="Film" data-criteria="film">Film</button>
-                <button class="switch-button" name="Food" data-criteria="food">Food</button>
-            </div>
-        </div>
-    </div>
-    
-    
+    <div class="container">
+        <div class="row chart-row-wrapper row-1">
+            <div class="input-file-wrapper col-8">
+                <div class="input-file-container"> 
+                    <div class="file-uploaded-block" id="uploaded-block">
+                        <div class="file-icon"><i class="fa-solid fa-file-csv"></i></div>
+                        <div class="file-name" id="file-name"></div>
+                        <div class="remove-file" id="remove-file"><i class="fa-solid fa-delete-left"></i></div>
+                    </div> 
+                    <div class="upload-block" id="upload-block">
+                        <input class="input-file" id="my-file" type="file" name="my-file">
+                        <label class="input-button" for="my-file">
+                            Choose File
+                        </label>
+                        <label tabindex="0" for="my-file" class="input-file-trigger">Or drop file here</label>
+                    </div>
                     
-    
-        
-        <div class="bar-chart-block block">
-        <h2 class='titular'>By Country <span>*1000</span></h2>
-        <div class='bar-chart'>
-            <canvas id="myDoubleBarChart" width="400" height="400"></canvas>
-        </div>
-        </div>
+                </div> 
+                <div id="load-animation">
+                <div class="btnMore"><div class="ellipsis"><div></div><div></div><div></div><div></div></div></div> 
                 </div>
+            </div>
+            <div class="col-4">
+                <div class="bar-chart-block block row">
+                    <h2 class='titular'>Categorical</h2>
+                    <div class='bar-chart'>
+                        <canvas id="myDoubleBarChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="expand-lineChart" id="expand-lineChart">Expand</button>
 
+            <div class="chart-row-wrapper">
+                <div class="row">
+                    <div  class="line-chart-block col-4 block">    
+                        
+                            <h2 class="titular">Food</h2>
+                            <canvas id="myLineChart" class="myLineChart" name="Food" width="600" height="400"></canvas>
+                    
+                    </div>
+                    <div class="line-chart-block col-4 block">
+                        
+                            <h2 class="titular">Fashion</h2>
+                            <canvas id="myLineChart" class="myLineChart" name="Fashion" width="600" height="400"></canvas>
+                        
+                    </div>
+                    <div  class="line-chart-block col-4 block">  
+                            <h2 class="titular">Film</h2>   
+                            <canvas id="myLineChart" class="myLineChart" name="Film" width="600" height="400"></canvas>
+                    
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row chart-row-wrapper">
+          
+                <div class="donut-chart-block block col-4">
+                    <h2 class="titular"></h2>
+                    <canvas class="myPieChart" name="Food" width="400" height="400"></canvas>
+              
+                </div>
+                <div class="donut-chart-block block col-4">
+                    <h2 class="titular"></h2>
+                    <canvas class="myPieChart" name="Fashion" width="400" height="400"></canvas>
+            
+                </div>
+                <div class="donut-chart-block block col-4">
+                    <h2 class="titular"></h2>
+                    <canvas class="myPieChart" name="Film" width="400" height="400"></canvas>
+            
+                </div>
+            </div>
+        </div>
+   
+     
+    </div>
             
 </body>
 <script src='index.js'></script>
