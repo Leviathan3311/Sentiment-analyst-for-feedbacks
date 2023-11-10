@@ -8,11 +8,15 @@ let remove_file  = document.getElementById("remove-file")
 let file_name  = document.getElementById("file-name")
 let porcion1_c  = document.getElementById("porcion1-c")
 let donut_chart  = document.getElementById("donut-chart")
+let cover_spin  = document.getElementById("cover_btn")
 let switch_button  = document.getElementsByClassName("switch-button")
 let ctx2 = document.getElementById('myDoubleBarChart').getContext('2d');
 let myLineChart_list = document.getElementsByClassName('myLineChart');
+let chart_row_list = document.getElementsByClassName('chart-row-wrapper')
+
 
 const myPieChart_list = document.getElementsByClassName('myPieChart');
+let checkbox_list  = document.getElementsByClassName("check-input")
 
 
 data={
@@ -222,8 +226,49 @@ Array.from(myLineChart_list).forEach(function myFunction(item, i) {
   MyLineChart_obj[type] = lineChart
   lineChart.update()
 })
+Array.from(checkbox_list).forEach(function myFunction(item, i) {
+  item.addEventListener('change', function (event) {
+    let type = item.getAttribute('name');
+    let chart_row = Array.from(chart_row_list).find((element) => element.getAttribute('name') == type);
 
+    
+    if (chart_row.classList.contains('hidden')) {
+      chart_row.classList.remove('hidden');
+      setTimeout(function () {
+        chart_row.classList.remove('visuallyhidden');
+      },10);
+    } else {
+      chart_row.classList.add('visuallyhidden');    
+      chart_row.addEventListener('transitionend', function(e) {
+        chart_row.classList.add('hidden');
+      }, {
+        capture: false,
+        once: true,
+        passive: false
+      });
+    }
 
+  })
+})
+
+let checkbox_enabled = function(new_type) {
+  Array.from(checkbox_list).forEach(function(element){
+    type = element.getAttribute('name')
+    let chart_row = Array.from(chart_row_list).find((element) => element.getAttribute('name') == type);
+
+    if (new_type.includes(type)) {
+      chart_row.classList.remove('hidden');
+      element.checked=true
+      element.disabled = false
+      element.parentElement.parentElement.style.opacity = 1
+    } else {
+      chart_row.classList.add('hidden');
+      element.disabled = true
+      element.checked=false
+      element.parentElement.parentElement.style.opacity = 0.5
+    }
+  })
+}
 let doubleBarChart = new Chart(ctx2, {
 	type: 'bar',
 	data: {
@@ -256,8 +301,10 @@ let doubleBarChart = new Chart(ctx2, {
 	}
 });
 
-
-
+cover_spin.addEventListener('click', function(){
+  checkbox_enabled([])
+  document.getElementById("cover-spin").style.display = 'block'
+})
 
 
 
@@ -347,9 +394,11 @@ active_lineChart(data)
 active_PieChart(data)
 
 
+
 let active_doubleBarChart = function(data) {  
 	let new_data = check_data(data)
 	let new_type = Object.keys(new_data)
+  checkbox_enabled(new_type)
 	doubleBarChart.data.labels = new_type
 	doubleBarChart.data.datasets[0].data = Object.values(new_data).map(value =>  value["pos"])
 	doubleBarChart.data.datasets[1].data = Object.values(new_data).map(value =>  value["neg"])
@@ -363,7 +412,6 @@ let hidden_load = function() {
   document.getElementById("load-animation").style.display="none"
 }
 
-hidden_load()
 
 fileInput.addEventListener("change", function( event ) {  
     upload_block.style.visibility = "hidden"
@@ -375,7 +423,9 @@ fileInput.addEventListener("change", function( event ) {
 	reader.readAsDataURL(fileInput.files[0]);
 	reader.onload = function () {
 	  let fileEncoded = {"file":reader.result};
-    document.getElementById("load-animation").style.display="block"
+    checkbox_enabled([])
+    document.getElementById("cover-spin").style.display = 'block'
+
 	  $.ajax({
 			url: "http://127.0.0.1:8000/predict",
 			type: 'POST',
@@ -384,17 +434,13 @@ fileInput.addEventListener("change", function( event ) {
     
 
 		}).done(function(result) {
-			// alert( "success" );
-      document.getElementById("load-animation").style.display="none"
-			console.log("Success")
 			console.log(result)
-
+      document.getElementById("cover-spin").style.display = 'none'
 			active_PieChart(result)
 			active_doubleBarChart(result)
       
 		  })
 		  .fail(function() {
-        document.getElementById("load-animation").style.display="none"
 			alert( "error" );
 		  })
 	};

@@ -42,6 +42,8 @@ h1, h2, p, a, span{
 	.scnd-font-color {
 		color: #9099b7;
 	}
+
+
 .titular {
 display: block;
 line-height: 60px;
@@ -50,16 +52,56 @@ text-align: center;
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
 }
-.row-1{
-  position: relative;
-  height: 500px;
+.checkbox-wrapper{
+  display: flex;
+  align-items: center;
 }
+.checkbox-wrapper h5{
+  padding: 2px 6px;
+  font-size: 16px;
+}
+
+.checkbox-chart{
+  background: rgb(0 173 255 / 20%);
+  border-radius: 10px;
+  border: 2px dashed #0000ff4d;
+  position: sticky;
+  top: 20px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: fit-content;
+  margin: 20px 0;
+  padding: 10px 2px;
+}
+.checkbox-chart .block{
+  min-width: 100px;
+}
+
 .chart-row-wrapper{
-  border-bottom:2px groove black;
   padding: 12px 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin: 8px 40px;
+  border-bottom:2px groove black;
+  transition: all 0.5s ease-out;
+  
 }
+.chart-row-wrapper.hidden{
+  display: none;
+}
+.visuallyhidden{
+  opacity: 0;
+  
+}
+.chart-row-wrapper .row{
+  position: relative;
+  height: 500px;
+  width: 100%;
+}
+
 .line-chart-block{
   flex:1 !important;
 }
@@ -88,10 +130,13 @@ border-top-right-radius: 5px;
 		.left-container {}
 			.menu-box {
 				height: 400px;
+    
 			}
 
 			.donut-chart-block {
 				overflow: hidden;
+        width: 350px !important;
+        height: auto;
 			}
 				.donut-chart-block .titular {
 					padding: 10px 0;
@@ -562,9 +607,49 @@ input file
 
 
   
+.container.chart-container{
+  position: relative;
+}
   
-  
-  
+#cover-spin {
+    position:absolute;
+    
+    right: -100px;
+    left: -100px;
+    top:0;
+    bottom:0;
+    background-color: #1b3b47b3;
+    z-index:9999;
+    display:none;
+}
+#cover-spin #load-animation{
+  position: absolute;
+  bottom: 0;
+}
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:100px;height:100px;
+    border-style:solid;
+    border-color:white;
+    border-top-color:transparent;
+    border-width: 10px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
   
   
   
