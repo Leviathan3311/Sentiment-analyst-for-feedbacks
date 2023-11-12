@@ -18,6 +18,7 @@ let chart_row_list = document.getElementsByClassName('chart-row-wrapper')
 const myPieChart_list = document.getElementsByClassName('myPieChart');
 let checkbox_list  = document.getElementsByClassName("check-input")
 
+let thread = 0
 
 data={
   "Fashion": {
@@ -422,7 +423,8 @@ fileInput.addEventListener("change", function( event ) {
   
 	reader.readAsDataURL(fileInput.files[0]);
 	reader.onload = function () {
-	  let fileEncoded = {"file":reader.result};
+    thread+=1
+	  let fileEncoded = {"file":reader.result,'thread':thread};
     checkbox_enabled([])
     document.getElementById("cover-spin").style.display = 'block'
 
@@ -431,14 +433,15 @@ fileInput.addEventListener("change", function( event ) {
 			type: 'POST',
 			data: JSON.stringify(fileEncoded),
 			contentType: 'application/json',
-    
+      
 
 		}).done(function(result) {
 			console.log(result)
-      document.getElementById("cover-spin").style.display = 'none'
-			active_PieChart(result)
-			active_doubleBarChart(result)
-      
+      if (thread == result['thread']){
+        document.getElementById("cover-spin").style.display = 'none'
+        active_PieChart(result['predict'])
+        active_doubleBarChart(result['predict'])
+      }
 		  })
 		  .fail(function() {
 			alert( "error" );
