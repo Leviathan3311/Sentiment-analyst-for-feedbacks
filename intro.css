@@ -20,7 +20,7 @@ section{
     justify-content: center;
     align-items: center;
     padding: 80px 100px;
-    color: #fff;
+    color: #f8fc50;
 
 }
 
@@ -199,14 +199,14 @@ section{
 }
 
 .pagination li a{
-    color: #fff;
+    color: #111222;
     text-decoration: none;
     font-size: 1.2em;
     line-height: 45px;
 }
 
 .previous-page, .next-page{
-    background: #0AB1CE;
+    background: #f8fc50;
     width: 80px;
     border-radius: 45px;
     cursor: pointer;
@@ -229,9 +229,9 @@ section{
 }
 
 .active{
-    background: #0AB1CE;
+    background: #f8fc50;
 }
-
+ 
 .disable{
     background: #ccc;
 }
