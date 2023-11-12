@@ -8,7 +8,7 @@ let remove_file  = document.getElementById("remove-file")
 let file_name  = document.getElementById("file-name")
 let porcion1_c  = document.getElementById("porcion1-c")
 let donut_chart  = document.getElementById("donut-chart")
-let cover_spin  = document.getElementById("cover_btn")
+let cover_spin  = document.getElementById("cover-spin")
 let switch_button  = document.getElementsByClassName("switch-button")
 let ctx2 = document.getElementById('myDoubleBarChart').getContext('2d');
 let myLineChart_list = document.getElementsByClassName('myLineChart');
@@ -301,10 +301,10 @@ let doubleBarChart = new Chart(ctx2, {
 	}
 });
 
-cover_spin.addEventListener('click', function(){
-  checkbox_enabled([])
-  document.getElementById("cover-spin").style.display = 'block'
-})
+// cover_spin.addEventListener('click', function(){
+//   checkbox_enabled([])
+//   document.getElementById("cover-spin").style.display = 'block'
+// })
 
 
 
@@ -414,8 +414,8 @@ let hidden_load = function() {
 
 
 fileInput.addEventListener("change", function( event ) {  
-    upload_block.style.visibility = "hidden"
-    uploaded_block.style.visibility = "visible"
+    // upload_block.style.visibility = "hidden"
+    // uploaded_block.style.visibility = "visible"
     file_name.innerText = this.value
 
 	let reader = new FileReader();
@@ -454,8 +454,7 @@ fileInput.addEventListener("change", function( event ) {
 });  
 
 remove_file.addEventListener("click", function( event ) {  
-    uploaded_block.style.visibility = "hidden"
-    upload_block.style.visibility = "visible"
+  document.getElementById("cover-spin").style.display = 'none'
     fileInput.value = ''
 });  
 
