@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+    outline: none; border: none;
+}
+
+body{
+    background: #111222;
+
+}
+
+section{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 100px;
+    color: #f8fc50;
+
+}
+
+.container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+.main-title{
+    font-size: 4em;
+    margin-bottom: 50px;
+
+}
+
+.content{
+    position: relative;
+    width: 1150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.content .image{
+    position: relative;
+    width: 800px;
+    height: 400px;
+    overflow: hidden;
+
+}
+
+.content .image img{
+    z-index: 111;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+
+}
+
+.content .text-box{
+    z-index: 222;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    max-width: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transform: translate(-80px, 50px);
+
+}
+
+.content .text-box .h3{
+    font-size: 2em;
+    margin-bottom: 10px;
+
+}
+
+.section-title{
+    font-size: 3em;
+    margin-bottom: 80px;
+
+}
+
+.info-title{
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.info{
+    width: 700px;
+    margin-left: 50px;
+}
+
+.team-info{
+    width:  400px;
+    margin-left: 50px;
+}
+
+.containers{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+.section-title2{
+    font-size: 3em;
+    margin-bottom: 20px;
+
+}
+
+.card-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 30px;
+
+}
+
+.card-content .card{
+    opacity: 1;
+    transition: 0.4 ease;
+}
+.card-content .card.active{
+    opacity: 1;
+}
+.card{
+    position: relative;
+    background: #fff;
+    max-width: 325px;
+    width: 325px;
+    height: 300px;
+    margin: 25px;
+    box-shadow: 0 5px 25px rgb(1 1 1 /20%);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+
+
+
+.sec-03 .card:hover{
+    transform: scale(1.05);
+}
+.card-image{
+    max-height: 200px;
+
+}
+.card-image img{
+    max-width: 50%;
+}
+
+.card-info{
+    position: relative;
+    color: #222;
+    padding: 10px 20px 20px;
+
+}
+
+.card-info h3{
+    font-size: 1.8em;
+    font-weight: 800;
+    margin-bottom: 5px;
+
+}
+
+.card-info p{
+    font-size: 1em;
+    margin-bottom: 5px;
+
+}
+
+.pagination{
+    text-align: center;
+    margin: 30px 30px 60px;
+    user-select: none;
+}
+
+.pagination li{
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 0 5px 25px rgba(205, 74, 74, 0.1);
+}
+
+.pagination li a{
+    color: #111222;
+    text-decoration: none;
+    font-size: 1.2em;
+    line-height: 45px;
+}
+
+.previous-page, .next-page{
+    background: #f8fc50;
+    width: 80px;
+    border-radius: 45px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.previous-page:hover{
+    transform: translateX(-5px);
+
+}
+
+.next-page:hover{
+    transform: translateX(5px);
+}
+.current-page, .dots{
+    background: #ccc;
+    width: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.active{
+    background: #f8fc50;
+}
+ 
+.disable{
+    background: #ccc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
