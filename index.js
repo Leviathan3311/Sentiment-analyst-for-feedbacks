@@ -11,14 +11,13 @@ let donut_chart  = document.getElementById("donut-chart")
 let cover_spin  = document.getElementById("cover-spin")
 let switch_button  = document.getElementsByClassName("switch-button")
 let ctx2 = document.getElementById('myDoubleBarChart').getContext('2d');
-let myLineChart_list = document.getElementsByClassName('myLineChart');
+let myLineChart_list = document.getElementsByClassName('lineChart');
 let chart_row_list = document.getElementsByClassName('chart-row-wrapper')
-
 
 const myPieChart_list = document.getElementsByClassName('myPieChart');
 let checkbox_list  = document.getElementsByClassName("check-input")
 
-let thread = 0
+let thread_id = 0
 
 data={
   "Fashion": {
@@ -191,79 +190,67 @@ Array.from(myPieChart_list).forEach(function myFunction(item, i) {
   myPieChart_obj[type] = pieChart_food
   pieChart_food.update()
 })
-MyLineChart_obj = {}
-Array.from(myLineChart_list).forEach(function myFunction(item, i) {
-  let type = item.getAttribute("name")
-  let lineChart = new Chart(item.getContext('2d'), {
-    type: "line",
-      data: {
-      labels: [],
-      datasets: [{
-      label: "Positve",
-      fill: false,
-      tension: 0,
-      backgroundColor: "rgba(0, 200, 0, 0.59)",
-      borderColor: "rgba(0, 200, 0, 0.59)",
-      data: []
-      },
-    {
-      label: "Negative",
-      fill: false,
-      tension: 0,
-      backgroundColor: "rgba(236, 6, 6, 0.74)",
-      borderColor: "rgba(236, 6, 6, 0.74)",
-      data: []	
-    }
+
+
+function imshowChart(type){
+  let chart_row = Array.from(chart_row_list).find((element) => element.getAttribute('name') == type);
+
+    
+  if (chart_row.classList.contains('hidden')) {
+    chart_row.classList.remove('hidden');
+    setTimeout(function () {
+      console.log(type)
+      chart_row.classList.remove('visuallyhidden');
+    },10);
+  } else {
   
-      ]
-    },
-    options: {
-      legend: {display: false},
-    scales: {
-      yAxes: [{ticks: {min: 0, max:100}}],
-      }
-    }
-  });
-  MyLineChart_obj[type] = lineChart
-  lineChart.update()
-})
+    chart_row.classList.add('visuallyhidden');    
+    chart_row.addEventListener('transitionend', function(e) {
+      chart_row.classList.add('hidden');
+    }, {
+      capture: false,
+      once: true,
+      passive: false
+    });
+  }
+}
 Array.from(checkbox_list).forEach(function myFunction(item, i) {
   item.addEventListener('change', function (event) {
     let type = item.getAttribute('name');
-    let chart_row = Array.from(chart_row_list).find((element) => element.getAttribute('name') == type);
-
-    
-    if (chart_row.classList.contains('hidden')) {
-      chart_row.classList.remove('hidden');
-      setTimeout(function () {
-        chart_row.classList.remove('visuallyhidden');
-      },10);
-    } else {
-      chart_row.classList.add('visuallyhidden');    
-      chart_row.addEventListener('transitionend', function(e) {
-        chart_row.classList.add('hidden');
-      }, {
-        capture: false,
-        once: true,
-        passive: false
-      });
-    }
+    imshowChart(type)
 
   })
 })
 
+obj = {
+  'Food':'lineChart1',
+  'Fashion':'lineChart2',
+  'Film':'lineChart3',
+}
+let MyLineChart_obj = {}
+function init_lineChart(){
+  for (const [key, value] of Object.entries(obj)) {
+    MyLineChart_obj[key] = create_lineChart(data[key],value)
+  }
+}
+init_lineChart()
+
+
 let checkbox_enabled = function(new_type) {
-  Array.from(checkbox_list).forEach(function(element){
+  Array.from(checkbox_list).forEach(function(element,i){
     type = element.getAttribute('name')
     let chart_row = Array.from(chart_row_list).find((element) => element.getAttribute('name') == type);
 
     if (new_type.includes(type)) {
-      chart_row.classList.remove('hidden');
-      element.checked=true
       element.disabled = false
+      element.checked=true
+
       element.parentElement.parentElement.style.opacity = 1
+      imshowChart(type)
+
     } else {
       chart_row.classList.add('hidden');
+      chart_row.classList.add('visuallyhidden');
       element.disabled = true
       element.checked=false
       element.parentElement.parentElement.style.opacity = 0.5
@@ -277,14 +264,14 @@ let doubleBarChart = new Chart(ctx2, {
 		datasets: [
 			{
 				label: 'Positive',
-				data: [0,0,0],
+				data: [],
 				backgroundColor: 'rgba(75, 192, 192, 0.2)',
 				borderColor: 'rgba(75, 192, 192, 1)',
 				borderWidth: 1
 			},
 			{
 				label: 'Negative',
-				data: [0,0,0],
+				data: [],
 				backgroundColor: 'rgba(255, 99, 132, 0.2)',
 				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1
@@ -343,69 +330,49 @@ let check_data = function(data) {
 
 
 
-let click_lineChart = function(data,type){
-  let lineChart=MyLineChart_obj[type]
-  console.log(MyLineChart_obj)
-  
-  lineChart.data.labels= data[type]["date"]
-  lineChart.data.datasets[0].data = data[type]["pos_list"]
-  lineChart.data.datasets[1].data = data[type]["neg_list"]
-  lineChart.update()
-}
-let click_pieChart = function(data,type){
-  let PieChart=myPieChart_obj[type]
-  PieChart.data.datasets[0].data = [data[type]["pos"], data[type]["neg"]];
-	PieChart.update();
-}
-
-let active_lineChart = function(data) {  
-	let new_data = check_data(data)
-	let new_type = Object.keys(new_data)
-	Array.from(myLineChart_list).forEach(function myFunction(item, i) {
-		type = item.getAttribute("name")
+let active_lineChart = function(new_data,new_type){
+  console.log(new_data)
+  Array.from(myLineChart_list).forEach(function myFunction(item, i) {
+		let type = item.getAttribute("name")
 		if (new_type.includes(type)){
-			item.parentElement.style.display = "block"
-      click_lineChart(new_data,item.getAttribute("name"))
-		} else {
-      item.parentElement.style.display = "none"
-		}
-	  })
-
-	
-	
-}
-let active_PieChart = function(data) {  
-	let new_data = check_data(data)
-	let new_type = Object.keys(new_data)
-	Array.from(myPieChart_list).forEach(function myFunction(item, i) {
-		type = item.getAttribute("name")
-		if (new_type.includes(type)){
-      item.parentElement.style.display="block"
-      click_pieChart(new_data,item.getAttribute("name"))
-		} else {
-      item.parentElement.style.display="none"
+      console.log(type)
+      MyLineChart_obj[type].series._values[0].data._values = new_data
 		} 
 	  })
+  
+}
+
+
+
+
+let active_PieChart = function(new_data,new_type) {  
+	Array.from(myPieChart_list).forEach(function myFunction(item, i) {
+		let type = item.getAttribute("name")
+		if (new_type.includes(type)){
+      let PieChart=myPieChart_obj[type]
+      PieChart.data.datasets[0].data = [new_data[type]["pos"], new_data[type]["neg"]];
+      PieChart.update();
+		} 
+    
+	  })
 
 	
 	
 }
 
-active_lineChart(data)
-active_PieChart(data)
 
 
 
-let active_doubleBarChart = function(data) {  
-	let new_data = check_data(data)
-	let new_type = Object.keys(new_data)
-  checkbox_enabled(new_type)
+
+let active_doubleBarChart = function(new_data,new_type) {  
+  console.log(new_data)
 	doubleBarChart.data.labels = new_type
 	doubleBarChart.data.datasets[0].data = Object.values(new_data).map(value =>  value["pos"])
 	doubleBarChart.data.datasets[1].data = Object.values(new_data).map(value =>  value["neg"])
 	doubleBarChart.update()
+
 }
-active_doubleBarChart(data)
+
 
 
 
@@ -414,17 +381,38 @@ let hidden_load = function() {
 }
 
 
-fileInput.addEventListener("change", function( event ) {  
-    // upload_block.style.visibility = "hidden"
-    // uploaded_block.style.visibility = "visible"
-    file_name.innerText = this.value
 
+function interruptProgress(){
+  thread_id+=1
+  $.ajax({
+    url: `http://127.0.0.1:8000/interrupt?thread_id=${thread_id}`,
+    type: 'POST',
+
+  }).done(function() {
+      console.log('Success')
+    })
+    .fail(function() {
+      console.log('Failure')
+    })
+    fileInput.value = ''
+}
+
+checkbox_enabled([])
+let new_data = check_data(data)
+let new_type = Object.keys(new_data)
+active_PieChart(new_data,['Fashion','Food'])
+active_doubleBarChart(new_data,['Fashion','Food'])
+active_lineChart(new_data,['Fashion','Food'])
+checkbox_enabled(['Fashion','Food'])
+
+fileInput.addEventListener("change", function( event ) {  
+  file_name.innerText = this.value
 	let reader = new FileReader();
-  
+
 	reader.readAsDataURL(fileInput.files[0]);
 	reader.onload = function () {
-    thread+=1
-	  let fileEncoded = {"file":reader.result,'thread':thread};
+    thread_id+=1
+	  let fileEncoded = {"file":reader.result,'thread_id':thread_id};
     checkbox_enabled([])
     document.getElementById("cover-spin").style.display = 'block'
 
@@ -437,15 +425,23 @@ fileInput.addEventListener("change", function( event ) {
 
 		}).done(function(result) {
 			console.log(result)
-      if (thread == result['thread']){
+      
+      if (result['status_code'] == 1){
+        let new_data = check_data(result['predict'])
+        let new_type = Object.keys(new_data)
         document.getElementById("cover-spin").style.display = 'none'
-        active_PieChart(result['predict'])
-        active_doubleBarChart(result['predict'])
+        active_PieChart(new_data, new_type)
+        active_doubleBarChart(new_data, new_type)
+        active_lineChart(new_data, new_type)
+        checkbox_enabled(new_type)
+        
       }
 		  })
 		  .fail(function() {
 			alert( "error" );
 		  })
+    fileInput.value = ''
+
 	};
   
 	reader.onerror = function (error) {
@@ -458,7 +454,7 @@ fileInput.addEventListener("change", function( event ) {
 
 remove_file.addEventListener("click", function( event ) {  
   document.getElementById("cover-spin").style.display = 'none'
-    fileInput.value = ''
+  interruptProgress()
 });  
 
 
@@ -495,3 +491,117 @@ remove_file.addEventListener("click", function( event ) {
 
 	
   })(jQuery); 
+
+
+
+
+  function load_data(data){
+    let new_data = []
+    data['date'].map(function(d,i) {
+      new_data.push({
+        date:+d/1000000,
+        value1: data['pos'][i], 
+        value2: data['neg'][i]
+      })
+    })
+    return new_data
+  }
+
+
+  function create_lineChart(data,id){
+    let new_data = load_data(data)
+    let color_line = {
+      'series 1':"#00FF66",
+      "series 2":"#FF0000"
+    }
+    var root = am5.Root.new(id);
+  
+  
+    root.setThemes([
+      am5themes_Animated.new(root)
+    ]);
+  
+  
+    root.dateFormatter.setAll({
+      dateFields: ["valueX"]
+    });
+  
+    var chart = root.container.children.push(am5xy.XYChart.new(root, {
+      panX: false,
+      panY: false,
+      wheelX: "panX",
+      wheelY: "zoomX"
+    }));
+  
+    var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+      behavior: "zoomX"
+    }));
+    cursor.lineY.set("visible", false);
+  
+  
+    var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+      maxDeviation: 0.5,
+      baseInterval: {
+        timeUnit: "day",
+        count: 1
+      },
+      renderer: am5xy.AxisRendererX.new(root, {
+        pan:"zoom"
+      }),
+      tooltip: am5.Tooltip.new(root, {})
+    }));
+  
+    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+      maxDeviation:1,
+      renderer: am5xy.AxisRendererY.new(root, {
+        pan:"zoom"
+      })
+    }));
+  
+   
+    function createSeries(name, field) {
+      var series = chart.series.push(am5xy.LineSeries.new(root, {
+        name: "Series",
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: field,
+        valueXField: "date",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueX}: {valueY}"
+        }),
+        
+      }));
+      series.fills.template.setAll({
+        visible: true,
+        fillOpacity: 0.1,
+      });
+      
+      series.bullets.push(function() {
+        return am5.Bullet.new(root, {
+          locationY: 0,
+          sprite: am5.Circle.new(root, {
+            radius: 2,
+            stroke: root.interfaceColors.get("background"),
+            strokeWidth: 1,
+            fill: series.get("fill")
+          })
+        });
+      });
+      series.set("fill", am5.color(color_line[name]))
+      series.data.setAll(new_data);
+      series.appear(1000);
+  
+    }
+  
+    chart.set("scrollbarX", am5.Scrollbar.new(root, {
+      orientation: "horizontal"
+    }));
+  
+  
+    createSeries("series 1",'value1')
+    createSeries("series 2",'value2')
+  
+    chart.appear(1000, 100);
+    return chart
+  }
+  
