@@ -65,6 +65,19 @@ body{
 	background-size: contain;
 	border-bottom: 4px solid #00fa3f8f;
 }
+.logo-wrapper{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.logo-wrapper h3{
+	color:  #ffffff;
+	font: normal 30px 'Roboto', cursive;
+	margin: 0 10px;
+}
+.logo-wrapper h3 span{
+	color:  #5383d3;
+}
 .container-1{
     display:flex;
     justify-content:space-between;
