@@ -4,44 +4,14 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;  
 }
+
+
 body {
 	/* background: linear-gradient(to right, #A8B4BA, #6DA6C0) !important;
    */
    background-color: rgba(3 164 255 / 20%) !important;
 }
 
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding-left: 0;
-}
-
-h1 {
-	font-size: 23px;
-}
-
-h2 {
-	font-size: 17px;
-}
-
-p {
-	font-size: 15px;
-}
-
-a {
-	text-decoration: none;
-	font-size: 15px;
-}
-	a:hover {
-		text-decoration: underline;
-	}
-
-h1, h2, p, a, span{
-	color: #fff;
-}
-	.scnd-font-color {
-		color: #9099b7;
-	}
 
 
 .titular {

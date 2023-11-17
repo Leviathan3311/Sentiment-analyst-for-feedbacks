@@ -54,6 +54,8 @@ section:nth-child(3){
     width: 800px;
     height: 400px;
     overflow: hidden;
+    background-size: cover ;
+    border-radius:10px;
 }
 
 .content .image img{
@@ -150,6 +152,8 @@ section:nth-child(3){
     border-radius: 10px;
     overflow: hidden;
     transition: 0.3s ease;
+    display: flex;
+    justify-content: center;
 }
 
 

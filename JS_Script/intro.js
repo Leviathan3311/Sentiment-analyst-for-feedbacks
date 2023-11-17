@@ -26,7 +26,7 @@ function getPageList(totalPages, page, maxLength){
 
 $(function(){
     var numberOfItems = $(".card-content .card").length;
-    var limitPerPage = 3;
+    var limitPerPage = 4;
     var totalPages = Math.ceil(numberOfItems / limitPerPage);
     var paginationSize = 5;
     var currentPage;
@@ -54,7 +54,6 @@ $(function(){
         pageInterval = setInterval(changePage, 5000); 
     });
 
-
     function showPage(whichPage){
         if(whichPage < 1 || whichPage > totalPages) return false;
 
@@ -62,10 +61,9 @@ $(function(){
         $(".card-content .card").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
 
         $(".pagination li").slice(1, -1).remove();
-
         getPageList(totalPages, currentPage, paginationSize).forEach(item => {
             $("<li>").addClass("page-item").addClass(item ? "current-page": "dots")
-                .toggleClass("active", item === currentPage).append($("<a>").addClass("page-link")
+                .toggleClass("active", item === currentPage).append($("<a>").addClass("page-links")
                 .attr({href: "javascript:void(0)"}).text(item || "...")).insertBefore(".next-page");
         });
 
@@ -76,8 +74,8 @@ $(function(){
     }
 
     $(".pagination").append(
-        $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Prev")),
-        $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Next"))
+        $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-links").attr({href: "javascript:void(0)"}).text("Prev")),
+        $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-links").attr({href: "javascript:void(0)"}).text("Next"))
     );
 
     $(".card-content").show();
@@ -97,37 +95,24 @@ $(function(){
 });
 
 
-
-
-
-
-
-
     ScrollReveal({ 
-        reset: true,
+        reset: false,
         distance: '60px',
         duration: 2500,
         delay: 400,
-        
-
     
     });
 
-    ScrollReveal().reveal('.main-title', {delay: 200});
-    ScrollReveal().reveal('.section-title', {delay: 200, origin: 'left'});
-    ScrollReveal().reveal('.sec-01 .image', {delay: 200, origin: 'bottom'});
-    ScrollReveal().reveal('.text-box', {delay: 300, origin: 'right'});
-    ScrollReveal().reveal('.team-info', {delay: 300, origin: 'right', interval: 200});
-    ScrollReveal().reveal('.sec-02 .image', {delay: 300, origin: 'left'});
-    ScrollReveal().reveal('.info', {delay: 300, origin: 'top'});
-    ScrollReveal().reveal('.section-title2', {delay: 200, origin: 'top'});
-    ScrollReveal().reveal('.sec-03 .card-content', {delay: 200, origin: 'bottom'});
-    ScrollReveal().reveal('.pagination', {delay: 220, origin: 'bottom'});
-
-
-
-
-    
+    ScrollReveal().reveal('.main-title', {delay: 100});
+    ScrollReveal().reveal('.section-title', {delay: 100, origin: 'left'});
+    ScrollReveal().reveal('.sec-01 .image', {delay: 100, origin: 'bottom'});
+    ScrollReveal().reveal('.text-box', {delay: 200, origin: 'right'});
+    ScrollReveal().reveal('.team-info', {delay: 200, origin: 'right', interval: 100});
+    ScrollReveal().reveal('.sec-02 .image', {delay: 200, origin: 'left'});
+    ScrollReveal().reveal('.info', {delay: 100, origin: 'top'});
+    ScrollReveal().reveal('.section-title2', {delay: 100, origin: 'top'});
+    ScrollReveal().reveal('.sec-03 .card-content', {delay: 100, origin: 'bottom'});
+    ScrollReveal().reveal('.pagination', {delay: 100, origin: 'bottom'});
 
 
 
