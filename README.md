@@ -1,5 +1,6 @@
 # NLP
-Link model folder: https://drive.google.com/drive/folders/1c580nGf3MCGV_JU08ytWiBJxKTJDE0yX
+Link model folder: https://drive.google.com/drive/folders/1c580nGf3MCGV_JU08ytWiBJxKTJDE0yX <br>
+Back-up link: https://drive.google.com/drive/folders/1_nUPmfyuDdglCnFgXm-XNZ9TJ19_l8yq?usp=share_link
 # Overview
 This project is sentiment analyst for web feedbacks (food, fashion, film).
 # Usage
